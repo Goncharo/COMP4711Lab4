@@ -47,12 +47,23 @@ class Orders extends MY_Model {
 
     // retrieve the details for an order
     function details($num) {
+        $order = $this->orders->get($num);
+        $this1 = array(
+            'num' => $order->num,
+            'datetime' => $order->date,
+            'amount' => $order->total
+        );
+        
+        return $this1;
         
     }
 
     // cancel an order
     function flush($num) {
-        
+        $this->orderitems->delete_some($order_num);
+        $record = $this->orders->get($order_num);
+        $record->status = 'x';
+        $this->orders->update($record);
     }
 
     // validate an order
